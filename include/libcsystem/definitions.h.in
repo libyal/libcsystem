@@ -1,0 +1,64 @@
+/*
+ * Definitions for libcsystem
+ *
+ * Copyright (c) 2008-2014, Joachim Metz <joachim.metz@gmail.com>
+ *
+ * Refer to AUTHORS for acknowledgements.
+ *
+ * This software is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this software.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#if !defined( _LIBCSYSTEM_DEFINITIONS_H )
+#define _LIBCSYSTEM_DEFINITIONS_H
+
+#include <libcsystem/types.h>
+
+#define LIBCSYSTEM_VERSION				@VERSION@
+
+/* The libcsystem version string
+ */
+#define LIBCSYSTEM_VERSION_STRING				"@VERSION@"
+
+/* The file access flags
+ * bit 1	set to 1 for read access
+ * bit 2	set to 1 for write access
+ * bit 3	set to 1 to truncate an existing file on write
+ * bit 4-8	not used
+ */
+enum LIBCSYSTEM_ACCESS_FLAGS
+{
+	LIBCSYSTEM_ACCESS_FLAG_READ			= 0x01,
+	LIBCSYSTEM_ACCESS_FLAG_WRITE			= 0x02,
+	LIBCSYSTEM_ACCESS_FLAG_TRUNCATE			= 0x04
+};
+
+/* The file access macros
+ */
+#define LIBCSYSTEM_OPEN_READ				( LIBCSYSTEM_ACCESS_FLAG_READ )
+#define LIBCSYSTEM_OPEN_WRITE				( LIBCSYSTEM_ACCESS_FLAG_WRITE )
+#define LIBCSYSTEM_OPEN_READ_WRITE			( LIBCSYSTEM_ACCESS_FLAG_READ | LIBCSYSTEM_ACCESS_FLAG_WRITE )
+#define LIBCSYSTEM_OPEN_WRITE_TRUNCATE			( LIBCSYSTEM_ACCESS_FLAG_WRITE | LIBCSYSTEM_ACCESS_FLAG_TRUNCATE )
+#define LIBCSYSTEM_OPEN_READ_WRITE_TRUNCATE		( LIBCSYSTEM_ACCESS_FLAG_READ | LIBCSYSTEM_ACCESS_FLAG_WRITE | LIBCSYSTEM_ACCESS_FLAG_TRUNCATE )
+
+/* The access behavior types
+ */
+enum LIBCSYSTEM_ACCESS_BEHAVIOR
+{
+	LIBCSYSTEM_ACCESS_BEHAVIOR_NORMAL,
+	LIBCSYSTEM_ACCESS_BEHAVIOR_RANDOM,
+	LIBCSYSTEM_ACCESS_BEHAVIOR_SEQUENTIAL
+};
+
+#endif
+

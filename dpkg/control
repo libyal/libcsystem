@@ -1,0 +1,30 @@
+Source: libcsystem
+Section: unknown
+Priority: extra
+Maintainer: Joachim Metz <joachim.metz@gmail.com>
+Build-Depends: debhelper (>= 7), autotools-dev
+Standards-Version: 3.8.3
+Homepage: https://github.com/libyal/libcsystem/
+
+Package: libcsystem
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: libcsystem-dbg
+Description: Library to support cross-platform C system functions
+ libcsystem is a library to support cross-platform C system functions.
+
+Package: libcsystem-dbg
+Architecture: any
+Section: debug
+Depends: libcsystem (= ${Source-Version}), ${misc:Depends}
+Description: Debugging symbols for libcsystem
+ Debugging symbols for libcsystem.
+
+Package: libcsystem-dev
+Section: libdevel
+Architecture: any
+Depends: libcsystem (= ${Source-Version})
+Description: Header files and libraries for developing applications for libcsystem
+ Header files and libraries for developing applications for libcsystem.
+
