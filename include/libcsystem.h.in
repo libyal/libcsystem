@@ -111,7 +111,7 @@ int libcsystem_error_backtrace_sprint(
 LIBCSYSTEM_EXTERN \
 int libcsystem_initialize(
      int stdio_mode,
-     libcsystem_error_t *error );
+     libcsystem_error_t **error );
 
 /* -------------------------------------------------------------------------
  * Signal functions
@@ -123,14 +123,14 @@ int libcsystem_initialize(
 LIBCSYSTEM_EXTERN \
 int libcsystem_signal_attach(
      void (*signal_handler)( libcsystem_signal_t ),
-     libcsystem_error_t *error );
+     libcsystem_error_t **error );
 
 /* Detaches a signal handler for Ctrl+C or Ctrl+Break signals
  * Returns 1 if successful or -1 on error
  */
 LIBCSYSTEM_EXTERN \
 int libcsystem_signal_detach(
-     libcsystem_error_t *error );
+     libcsystem_error_t **error );
 
 /* -------------------------------------------------------------------------
  * Command line argument functions

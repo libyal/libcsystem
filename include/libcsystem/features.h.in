@@ -38,5 +38,21 @@
 #endif
 #endif
 
+#if !defined( LIBCSYSTEM_ATTRIBUTE_UNUSED )
+#if defined( __GNUC__ ) && __GNUC__ >= 3
+#define LIBCSYSTEM_ATTRIBUTE_UNUSED	__attribute__ ((__unused__))
+#else
+#define LIBCSYSTEM_ATTRIBUTE_UNUSED
+#endif
+#endif
+
+#if defined( _MSC_VER )
+#define LIBCSYSTEM_UNREFERENCED_PARAMETER( parameter ) \
+	UNREFERENCED_PARAMETER( parameter );
+#else
+#define LIBCSYSTEM_UNREFERENCED_PARAMETER( parameter ) \
+	/* parameter */
+#endif
+
 #endif
 

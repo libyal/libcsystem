@@ -51,7 +51,7 @@ typedef int libcsystem_signal_t;
 
 #endif
 
-#endif
+#endif /* defined( HAVE_LOCAL_LIBCSYSTEM ) */
 
 #endif
 
