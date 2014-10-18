@@ -34,12 +34,20 @@
 /* The following type definitions hide internal data structures
  */
 #if defined( HAVE_DEBUG_OUTPUT ) && !defined( WINAPI )
-typedef struct libcsystem_file {}		libcsystem_file_t;
+typedef struct libcsystem_file {}	libcsystem_file_t;
 typedef struct libcsystem_stream {}	libcsystem_stream_t;
 
 #else
 typedef intptr_t libcsystem_file_t;
 typedef intptr_t libcsystem_stream_t;
+
+#endif
+
+#if defined( WINAPI )
+typedef unsigned long libcsystem_signal_t;
+
+#elif defined( HAVE_SIGNAL_H )
+typedef int libcsystem_signal_t;
 
 #endif
 

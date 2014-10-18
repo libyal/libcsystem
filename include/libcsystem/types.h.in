@@ -204,6 +204,14 @@ typedef int64_t off64_t;
 typedef intptr_t libcsystem_file_t;
 typedef intptr_t libcsystem_stream_t;
 
+#if defined( WINAPI )
+typedef unsigned long libcsystem_signal_t;
+
+#elif defined( HAVE_SIGNAL_H )
+typedef int libcsystem_signal_t;
+
+#endif
+
 #ifdef __cplusplus
 }
 #endif

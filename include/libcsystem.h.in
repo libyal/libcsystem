@@ -101,6 +101,116 @@ int libcsystem_error_backtrace_sprint(
      char *string,
      size_t size );
 
+/* -------------------------------------------------------------------------
+ * Support functions
+ * ------------------------------------------------------------------------- */
+
+/* Initializes the system values
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_initialize(
+     int stdio_mode,
+     libcsystem_error_t *error );
+
+/* -------------------------------------------------------------------------
+ * Signal functions
+ * ------------------------------------------------------------------------- */
+
+/* Attaches a signal handler for Ctrl+C or Ctrl+Break signals
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_signal_attach(
+     void (*signal_handler)( libcsystem_signal_t ),
+     libcsystem_error_t *error );
+
+/* Detaches a signal handler for Ctrl+C or Ctrl+Break signals
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_signal_detach(
+     libcsystem_error_t *error );
+
+/* -------------------------------------------------------------------------
+ * Command line argument functions
+ * ------------------------------------------------------------------------- */
+
+#if defined( HAVE_GETOPT )
+#define libcsystem_getopt( argument_count, argument_values, options_string ) \
+        getopt( argument_count, argument_values, options_string )
+
+#elif defined( LIBCSYSTEM_HAVE_WIDE_CHARACTER_TYPE )
+/* The current option argument
+ */
+LIBCSYSTEM_EXTERN \
+wchar_t *optarg;
+
+/* The option index
+ * Start with argument 1 (argument 0 is the program name)
+ */
+LIBCSYSTEM_EXTERN \
+int optind;
+
+/* Value to indicate the current option
+ */
+LIBCSYSTEM_EXTERN \
+wint_t optopt;
+
+/* Get the program options
+ * Function for platforms that do not have the getopt function
+ * Returns the option character processed, or -1 on error,
+ * ? if the option was not in the options string, : if the option argument was missing
+ */
+LIBCSYSTEM_EXTERN \
+wint_t libcsystem_getopt(
+        int argument_count,
+        wchar_t * const argument_values[],
+        const wchar_t *options_string );
+
+#else
+/* The current option argument
+ */
+LIBCSYSTEM_EXTERN \
+char *optarg;
+
+/* The option index
+ * Start with argument 1 (argument 0 is the program name)
+ */
+LIBCSYSTEM_EXTERN \
+int optind;
+
+/* Value to indicate the current option
+ */
+LIBCSYSTEM_EXTERN \
+int optopt;
+
+/* Get the program options
+ * Function for platforms that do not have the getopt function
+ * Returns the option character processed, or -1 on error,
+ * ? if the option was not in the options string, : if the option argument was missing
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_getopt(
+     int argument_count,
+     char * const argument_values[],
+     const char *options_string );
+
+#endif /* defined( HAVE_GETOPT ) */
+
+/* -------------------------------------------------------------------------
+ * File IO functions
+ * ------------------------------------------------------------------------- */
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_close( file_descriptor ) \
+        _close( file_descriptor )
+
+#elif defined( HAVE_CLOSE )
+#define libcsystem_file_io_close( file_descriptor ) \
+        close( file_descriptor )
+#endif
+
 #if defined( __cplusplus )
 }
 #endif
