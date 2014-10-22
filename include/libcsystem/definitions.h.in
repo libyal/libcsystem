@@ -28,7 +28,7 @@
 
 /* The libcsystem version string
  */
-#define LIBCSYSTEM_VERSION_STRING				"@VERSION@"
+#define LIBCSYSTEM_VERSION_STRING			"@VERSION@"
 
 /* The file access flags
  * bit 1	set to 1 for read access

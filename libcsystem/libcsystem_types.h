@@ -35,10 +35,12 @@
  */
 #if defined( HAVE_DEBUG_OUTPUT ) && !defined( WINAPI )
 typedef struct libcsystem_file {}	libcsystem_file_t;
+typedef struct libcsystem_glob {}	libcsystem_glob_t;
 typedef struct libcsystem_stream {}	libcsystem_stream_t;
 
 #else
 typedef intptr_t libcsystem_file_t;
+typedef intptr_t libcsystem_glob_t;
 typedef intptr_t libcsystem_stream_t;
 
 #endif

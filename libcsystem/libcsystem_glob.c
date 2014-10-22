@@ -39,6 +39,7 @@
 #include "libcsystem_glob.h"
 #include "libcsystem_libcerror.h"
 #include "libcsystem_libcstring.h"
+#include "libcsystem_types.h"
 
 /* TODO rename */
 #if defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER )
@@ -76,7 +77,7 @@
 #endif
 #endif
 
-#if !defined( LIBCSYSTEM_HAVE_GLOB )
+#if !defined( HAVE_GLOB_H )
 
 /* Creates a glob
  * Make sure the value glob is referencing, is set to NULL
@@ -86,7 +87,8 @@ int libcsystem_glob_initialize(
      libcsystem_glob_t **glob,
      libcerror_error_t **error )
 {
-	static char *function = "libcsystem_glob_initialize";
+	libcsystem_internal_glob_t *internal_glob = NULL;
+	static char *function                     = "libcsystem_glob_initialize";
 
 	if( glob == NULL )
 	{
@@ -110,10 +112,10 @@ int libcsystem_glob_initialize(
 
 		return( -1 );
 	}
-	*glob = memory_allocate_structure(
-		 libcsystem_glob_t );
+	internal_glob = memory_allocate_structure(
+	                 libcsystem_internal_glob_t );
 
-	if( *glob == NULL )
+	if( internal_glob == NULL )
 	{
 		libcerror_error_set(
 		 error,
@@ -125,9 +127,9 @@ int libcsystem_glob_initialize(
 		goto on_error;
 	}
 	if( memory_set(
-	     *glob,
+	     internal_glob,
 	     0,
-	     sizeof( libcsystem_glob_t ) ) == NULL )
+	     sizeof( libcsystem_internal_glob_t ) ) == NULL )
 	{
 		libcerror_error_set(
 		 error,
@@ -138,15 +140,15 @@ int libcsystem_glob_initialize(
 
 		goto on_error;
 	}
+	*glob = (libcsystem_glob_t *) internal_glob;
+
 	return( 1 );
 
 on_error:
-	if( *glob != NULL )
+	if( internal_glob != NULL )
 	{
 		memory_free(
-		 *glob );
-
-		*glob = NULL;
+		 internal_glob );
 	}
 	return( -1 );
 }
@@ -158,8 +160,9 @@ int libcsystem_glob_free(
      libcsystem_glob_t **glob,
      libcerror_error_t **error )
 {
-	static char *function = "libcsystem_glob_free";
-	int result_iterator   = 0;
+	libcsystem_internal_glob_t *internal_glob = NULL;
+	static char *function                     = "libcsystem_glob_free";
+	int result_iterator                       = 0;
 
 	if( glob == NULL )
 	{
@@ -174,25 +177,26 @@ int libcsystem_glob_free(
 	}
 	if( *glob != NULL )
 	{
-		if( ( *glob )->result != NULL )
+		internal_glob = (libcsystem_internal_glob_t *) *glob;
+		*glob         = NULL;
+
+		if( internal_glob->results != NULL )
 		{
 			for( result_iterator = 0;
-			     result_iterator < ( *glob )->number_of_results;
+			     result_iterator < internal_glob->number_of_results;
 			     result_iterator++ )
 			{
-				if( ( *glob )->result[ result_iterator ] != NULL )
+				if( internal_glob->results[ result_iterator ] != NULL )
 				{
 					memory_free(
-					 ( *glob )->result[ result_iterator ] );
+					 internal_glob->results[ result_iterator ] );
 				}
 			}
 			memory_free(
-			 ( *glob )->result );
+			 internal_glob->results );
 		}
 		memory_free(
-		 *glob );
-
-		*glob = NULL;
+		 internal_glob );
 	}
 	return( 1 );
 }
@@ -205,10 +209,11 @@ int libcsystem_glob_resize(
      int new_number_of_results,
      libcerror_error_t **error )
 {
-	void *reallocation    = NULL;
-	static char *function = "libcsystem_glob_resize";
-	size_t previous_size  = 0;
-	size_t new_size       = 0;
+	libcsystem_internal_glob_t *internal_glob = NULL;
+	void *reallocation                        = NULL;
+	static char *function                     = "libcsystem_glob_resize";
+	size_t previous_size                      = 0;
+	size_t new_size                           = 0;
 
 	if( glob == NULL )
 	{
@@ -221,7 +226,9 @@ int libcsystem_glob_resize(
 
 		return( -1 );
 	}
-	if( glob->number_of_results >= new_number_of_results )
+	internal_glob = (libcsystem_internal_glob_t *) glob;
+
+	if( internal_glob->number_of_results >= new_number_of_results )
 	{
 		libcerror_error_set(
 		 error,
@@ -232,7 +239,7 @@ int libcsystem_glob_resize(
 
 		return( -1 );
 	}
-	previous_size = sizeof( libcstring_system_character_t * ) * glob->number_of_results;
+	previous_size = sizeof( libcstring_system_character_t * ) * internal_glob->number_of_results;
 	new_size      = sizeof( libcstring_system_character_t * ) * new_number_of_results;
 
 	if( ( previous_size > (size_t) SSIZE_MAX )
@@ -248,7 +255,7 @@ int libcsystem_glob_resize(
 		return( -1 );
 	}
 	reallocation = memory_reallocate(
-	                glob->result,
+	                internal_glob->results,
 	                new_size );
 
 	if( reallocation == NULL )
@@ -262,10 +269,10 @@ int libcsystem_glob_resize(
 
 		return( -1 );
 	}
-	glob->result = (libcstring_system_character_t **) reallocation;
+	internal_glob->results = (libcstring_system_character_t **) reallocation;
 
 	if( memory_set(
-	     &( glob->result[ glob->number_of_results ] ),
+	     &( internal_glob->results[ internal_glob->number_of_results ] ),
 	     0,
 	     new_size - previous_size ) == NULL )
 	{
@@ -278,13 +285,13 @@ int libcsystem_glob_resize(
 
 		return( -1 );
 	}
-	glob->number_of_results = new_number_of_results;
+	internal_glob->number_of_results = new_number_of_results;
 
 	return( 1 );
 }
 
 /* Resolves filenames with wildcards (globs)
- * Returns the number of results if successful or -1 on error
+ * Returns 1 if successful or -1 on error
  */
 int libcsystem_glob_resolve(
      libcsystem_glob_t *glob,
@@ -301,12 +308,13 @@ int libcsystem_glob_resolve(
 	libcstring_system_character_t find_name[ _MAX_FNAME ];
 	libcstring_system_character_t find_extension[ _MAX_EXT ];
 
-	intptr_t find_handle    = 0;
+	intptr_t find_handle                      = 0;
 #endif
-	static char *function   = "libcsystem_glob_resolve";
-	size_t find_path_length = 0;
-	int globs_found         = 0;
-	int iterator            = 0;
+	libcsystem_internal_glob_t *internal_glob = NULL;
+	static char *function                     = "libcsystem_glob_resolve";
+	size_t find_path_length                   = 0;
+	int globs_found                           = 0;
+	int iterator                              = 0;
 
 	if( glob == NULL )
 	{
@@ -319,6 +327,8 @@ int libcsystem_glob_resolve(
 
 		return( -1 );
 	}
+	internal_glob = (libcsystem_internal_glob_t *) glob;
+
 	for( iterator = 0;
 	     iterator < number_of_patterns;
 	     iterator++ )
@@ -377,7 +387,7 @@ int libcsystem_glob_resolve(
 			{
 				if( libcsystem_glob_resize(
 				     glob,
-				     glob->number_of_results + 1,
+				     internal_glob->number_of_results + 1,
 				     error ) != 1 )
 				{
 					libcerror_error_set(
@@ -429,10 +439,10 @@ int libcsystem_glob_resolve(
 				find_path_length = libcstring_system_string_length(
 				                    find_path );
 
-				glob->result[ glob->number_of_results - 1 ] = libcstring_system_string_allocate(
-				                                               find_path_length + 1 );
+				internal_glob->results[ internal_glob->number_of_results - 1 ] = libcstring_system_string_allocate(
+				                                                                  find_path_length + 1 );
 
-				if( glob->result[ glob->number_of_results - 1 ] == NULL )
+				if( internal_glob->results[ internal_glob->number_of_results - 1 ] == NULL )
 				{
 					libcerror_error_set(
 					 error,
@@ -444,7 +454,7 @@ int libcsystem_glob_resolve(
 					return( -1 );
 				}
 				if( libcstring_system_string_copy(
-				     glob->result[ glob->number_of_results - 1 ],
+				     internal_glob->results[ internal_glob->number_of_results - 1 ],
 				     find_path,
 				     find_path_length ) == NULL )
 				{
@@ -456,13 +466,13 @@ int libcsystem_glob_resolve(
 					 function );
 
 					memory_free(
-					 glob->result[ glob->number_of_results - 1 ] );
+					 internal_glob->results[ internal_glob->number_of_results - 1 ] );
 
-					glob->result[ glob->number_of_results - 1 ] = NULL;
+					internal_glob->results[ internal_glob->number_of_results - 1 ] = NULL;
 
 					return( -1 );
 				}
-				( glob->result[ glob->number_of_results - 1 ] )[ find_path_length ] = 0;
+				( internal_glob->results[ internal_glob->number_of_results - 1 ] )[ find_path_length ] = 0;
 
 				globs_found++;
 
@@ -518,6 +528,59 @@ int libcsystem_glob_resolve(
 			return( -1 );
 		}
 	}
+	return( 1 );
+}
+
+/* Retrieves the glob results
+ * Returns 1 if successful or -1 on error
+ */
+int libcsystem_glob_get_results(
+     libcsystem_glob_t *glob,
+     int *number_of_results,
+     libcstring_system_character_t **results,
+     libcerror_error_t **error )
+{
+	libcsystem_internal_glob_t *internal_glob = NULL;
+	static char *function                     = "libcsystem_glob_resize";
+
+	if( glob == NULL )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
+		 LIBCERROR_ARGUMENT_ERROR_INVALID_VALUE,
+		 "%s: invalid glob.",
+		 function );
+
+		return( -1 );
+	}
+	internal_glob = (libcsystem_internal_glob_t *) glob;
+
+	if( number_of_results == NULL )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
+		 LIBCERROR_ARGUMENT_ERROR_INVALID_VALUE,
+		 "%s: invalid number of results.",
+		 function );
+
+		return( -1 );
+	}
+	if( results == NULL )
+	{
+		libcerror_error_set(
+		 error,
+		 LIBCERROR_ERROR_DOMAIN_ARGUMENTS,
+		 LIBCERROR_ARGUMENT_ERROR_INVALID_VALUE,
+		 "%s: invalid results.",
+		 function );
+
+		return( -1 );
+	}
+	*number_of_results = internal_glob->number_of_results;
+	*results           = internal_glob->results;
+
 	return( 1 );
 }
 

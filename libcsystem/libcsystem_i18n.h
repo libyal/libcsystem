@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/* TODO for now do nothing i18n like
+/* TODO for now do nothing i18n-like
 #define	_( string ) \
 	gettext( string )
 */

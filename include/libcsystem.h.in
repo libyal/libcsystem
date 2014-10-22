@@ -114,26 +114,20 @@ int libcsystem_initialize(
      libcsystem_error_t **error );
 
 /* -------------------------------------------------------------------------
- * Signal functions
+ * File IO functions
  * ------------------------------------------------------------------------- */
 
-/* Attaches a signal handler for Ctrl+C or Ctrl+Break signals
- * Returns 1 if successful or -1 on error
- */
-LIBCSYSTEM_EXTERN \
-int libcsystem_signal_attach(
-     void (*signal_handler)( libcsystem_signal_t ),
-     libcsystem_error_t **error );
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_close( file_descriptor ) \
+        _close( file_descriptor )
 
-/* Detaches a signal handler for Ctrl+C or Ctrl+Break signals
- * Returns 1 if successful or -1 on error
- */
-LIBCSYSTEM_EXTERN \
-int libcsystem_signal_detach(
-     libcsystem_error_t **error );
+#elif defined( HAVE_CLOSE )
+#define libcsystem_file_io_close( file_descriptor ) \
+        close( file_descriptor )
+#endif
 
 /* -------------------------------------------------------------------------
- * Command line argument functions
+ * Getopt functions
  * ------------------------------------------------------------------------- */
 
 #if defined( HAVE_GETOPT )
@@ -199,17 +193,80 @@ int libcsystem_getopt(
 #endif /* defined( HAVE_GETOPT ) */
 
 /* -------------------------------------------------------------------------
- * File IO functions
+ * Glob functions
  * ------------------------------------------------------------------------- */
 
-#if defined( WINAPI ) && !defined( __CYGWIN__ )
-#define libcsystem_file_io_close( file_descriptor ) \
-        _close( file_descriptor )
+#if !defined( HAVE_GLOB_H )
 
-#elif defined( HAVE_CLOSE )
-#define libcsystem_file_io_close( file_descriptor ) \
-        close( file_descriptor )
-#endif
+/* Creates a glob
+ * Make sure the value glob is referencing, is set to NULL
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_glob_initialize(
+     libcsystem_glob_t **glob,
+     libcsystem_error_t **error );
+
+/* Frees a glob
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_glob_free(
+     libcsystem_glob_t **glob,
+     libcsystem_error_t **error );
+
+/* Resolves filenames with wildcards (globs)
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_glob_resolve(
+     libcsystem_glob_t *glob,
+     libcstring_system_character_t * const patterns[],
+     int number_of_patterns,
+     libcsystem_error_t **error );
+
+/* Retrieves the glob results
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_glob_get_results(
+     libcsystem_glob_t *glob,
+     int *number_of_results,
+     libcstring_system_character_t **results,
+     libcsystem_error_t **error );
+
+#endif /* !defined( HAVE_GLOB_H ) */
+
+/* -------------------------------------------------------------------------
+ * Internationalization (i18n) functions
+ * ------------------------------------------------------------------------- */
+
+/* TODO for now do nothing i18n-like
+#define	_( string ) \
+	gettext( string )
+*/
+
+#define	_( string ) \
+	string
+
+/* -------------------------------------------------------------------------
+ * Signal functions
+ * ------------------------------------------------------------------------- */
+
+/* Attaches a signal handler for Ctrl+C or Ctrl+Break signals
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_signal_attach(
+     void (*signal_handler)( libcsystem_signal_t ),
+     libcsystem_error_t **error );
+
+/* Detaches a signal handler for Ctrl+C or Ctrl+Break signals
+ * Returns 1 if successful or -1 on error
+ */
+LIBCSYSTEM_EXTERN \
+int libcsystem_signal_detach(
+     libcsystem_error_t **error );
 
 #if defined( __cplusplus )
 }
