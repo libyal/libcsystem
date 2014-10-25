@@ -1,6 +1,9 @@
 TODO
 * update libcsystem.3 man page
 
+20141025
+* removed libcsystem_file_stream.h
+
 20141022
 * worked on stand-alone version
 

@@ -16,7 +16,6 @@ libcsystem_la_SOURCES = \
 	libcsystem_extern.h \
 	libcsystem_find.h \
 	libcsystem_file_io.h \
-	libcsystem_file_stream.h \
 	libcsystem_getopt.c libcsystem_getopt.h \
 	libcsystem_glob.c libcsystem_glob.h \
 	libcsystem_i18n.h \
