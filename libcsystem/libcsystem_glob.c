@@ -537,7 +537,7 @@ int libcsystem_glob_resolve(
 int libcsystem_glob_get_results(
      libcsystem_glob_t *glob,
      int *number_of_results,
-     libcstring_system_character_t **results,
+     libcstring_system_character_t ***results,
      libcerror_error_t **error )
 {
 	libcsystem_internal_glob_t *internal_glob = NULL;

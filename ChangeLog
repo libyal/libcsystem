@@ -1,6 +1,9 @@
 TODO
 * update libcsystem.3 man page
 
+20141116
+* small fixes in glob
+
 20141025
 * removed libcsystem_file_stream.h
 

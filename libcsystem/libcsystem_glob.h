@@ -76,7 +76,7 @@ LIBCSYSTEM_EXTERN \
 int libcsystem_glob_get_results(
      libcsystem_glob_t *glob,
      int *number_of_results,
-     libcstring_system_character_t **results,
+     libcstring_system_character_t ***results,
      libcerror_error_t **error );
 
 #endif
