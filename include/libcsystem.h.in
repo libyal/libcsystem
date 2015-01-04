@@ -48,14 +48,14 @@ int libcsystem_file_exists(
      const char *filename,
      libcsystem_error_t **error );
 
-#if defined( HAVE_WIDE_CHARACTER_TYPE )
+#if defined( LIBCSYSTEM_HAVE_WIDE_CHARACTER_TYPE )
 
 LIBCSYSTEM_EXTERN \
 int libcsystem_file_exists_wide(
      const wchar_t *filename,
      libcsystem_error_t **error );
 
-#endif /* defined( HAVE_WIDE_CHARACTER_TYPE ) */
+#endif /* defined( LIBCSYSTEM_HAVE_WIDE_CHARACTER_TYPE ) */
 
 /* -------------------------------------------------------------------------
  * Error functions
@@ -135,6 +135,7 @@ int libcsystem_initialize(
         getopt( argument_count, argument_values, options_string )
 
 #elif defined( LIBCSYSTEM_HAVE_WIDE_CHARACTER_TYPE )
+
 /* The current option argument
  */
 LIBCSYSTEM_EXTERN \
@@ -163,6 +164,7 @@ wint_t libcsystem_getopt(
         const wchar_t *options_string );
 
 #else
+
 /* The current option argument
  */
 LIBCSYSTEM_EXTERN \
