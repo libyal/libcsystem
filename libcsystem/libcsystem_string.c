@@ -124,7 +124,7 @@ int libcsystem_string_decimal_copy_from_64_bit(
 	return( 1 );
 }
 
-/* Copies a string of a decimal value to a 16-bit value
+/* Copies a string of a decimal value to a 64-bit value
  * Returns 1 if successful or -1 on error
  */
 int libcsystem_string_decimal_copy_to_64_bit(
