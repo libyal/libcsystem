@@ -29,6 +29,12 @@
 #include <libcsystem/features.h>
 #include <libcsystem/types.h>
 
+/* unistd.h is included here to export getopt, optarg, optind and optopt
+ */
+#if defined( HAVE_UNISTD_H )
+#include <unistd.h>
+#endif
+
 #if defined( __cplusplus )
 extern "C" {
 #endif
@@ -220,22 +226,40 @@ int libcsystem_glob_free(
 /* Resolves filenames with wildcards (globs)
  * Returns 1 if successful or -1 on error
  */
+#if defined( WINAPI ) && ( defined( _UNICODE ) || defined( UNICODE ) )
 LIBCSYSTEM_EXTERN \
 int libcsystem_glob_resolve(
      libcsystem_glob_t *glob,
-     libcstring_system_character_t * const patterns[],
+     wchar_t * const patterns[],
      int number_of_patterns,
      libcsystem_error_t **error );
+#else
+LIBCSYSTEM_EXTERN \
+int libcsystem_glob_resolve(
+     libcsystem_glob_t *glob,
+     char * const patterns[],
+     int number_of_patterns,
+     libcsystem_error_t **error );
+#endif /* defined( WINAPI ) && ( defined( _UNICODE ) || defined( UNICODE ) ) */
 
 /* Retrieves the glob results
  * Returns 1 if successful or -1 on error
  */
+#if defined( WINAPI ) && ( defined( _UNICODE ) || defined( UNICODE ) )
 LIBCSYSTEM_EXTERN \
 int libcsystem_glob_get_results(
      libcsystem_glob_t *glob,
      int *number_of_results,
-     libcstring_system_character_t ***results,
+     wchar_t ***results,
      libcsystem_error_t **error );
+#else
+LIBCSYSTEM_EXTERN \
+int libcsystem_glob_get_results(
+     libcsystem_glob_t *glob,
+     int *number_of_results,
+     char ***results,
+     libcsystem_error_t **error );
+#endif /* defined( WINAPI ) && ( defined( _UNICODE ) || defined( UNICODE ) ) */
 
 #endif /* !defined( HAVE_GLOB_H ) */
 
