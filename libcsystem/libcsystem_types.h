@@ -19,8 +19,8 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBCSYSTEM_TYPES_H )
-#define _LIBCSYSTEM_TYPES_H
+#if !defined( _LIBCSYSTEM_INTERNAL_TYPES_H )
+#define _LIBCSYSTEM_INTERNAL_TYPES_H
 
 #include <common.h>
 #include <types.h>
@@ -55,5 +55,5 @@ typedef int libcsystem_signal_t;
 
 #endif /* defined( HAVE_LOCAL_LIBCSYSTEM ) */
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_INTERNAL_TYPES_H ) */
 
