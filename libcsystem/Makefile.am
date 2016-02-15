@@ -31,7 +31,7 @@ libcsystem_la_SOURCES = \
 	libcsystem_types.h \
 	libcsystem_unused.h
 
-libcsystem_la_LIBADD  = \
+libcsystem_la_LIBADD = \
 	@LIBCSTRING_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
 	@LIBCLOCALE_LIBADD@ \
