@@ -43,7 +43,7 @@ typedef intptr_t libcsystem_file_t;
 typedef intptr_t libcsystem_glob_t;
 typedef intptr_t libcsystem_stream_t;
 
-#endif
+#endif /* defined( HAVE_DEBUG_OUTPUT ) && !defined( WINAPI ) */
 
 #if defined( WINAPI )
 typedef unsigned long libcsystem_signal_t;

@@ -32,6 +32,14 @@
 extern "C" {
 #endif
 
+#if !defined( HAVE_LOCAL_LIBCSYSTEM )
+
+LIBCSYSTEM_EXTERN \
+const char *libcsystem_get_version(
+             void );
+
+#endif /* !defined( HAVE_LOCAL_LIBCSYSTEM ) */
+
 LIBCSYSTEM_EXTERN \
 int libcsystem_initialize(
      int stdio_mode,
@@ -41,5 +49,5 @@ int libcsystem_initialize(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_SUPPORT_H ) */
 
