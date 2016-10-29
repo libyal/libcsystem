@@ -119,7 +119,7 @@ stamp-h[1-9]
 /include/libcsystem/types.h
 /libcsystem/libcsystem.rc
 /libcsystem/libcsystem_definitions.h
-/tests/csystem_test_get_version
+/tests/csystem_test_support
 /tests/tmp*
 
 # Local library dependencies specific files

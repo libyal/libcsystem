@@ -16,15 +16,16 @@ EXTRA_DIST = \
 	$(check_SCRIPTS)
 
 check_PROGRAMS = \
-	csystem_test_get_version
+	csystem_test_support
 
-csystem_test_get_version_SOURCES = \
-	csystem_test_get_version.c \
+csystem_test_support_SOURCES = \
 	csystem_test_libcstring.h \
 	csystem_test_libcsystem.h \
+	csystem_test_macros.h \
+	csystem_test_support.c \
 	csystem_test_unused.h
 
-csystem_test_get_version_LDADD = \
+csystem_test_support_LDADD = \
 	../libcsystem/libcsystem.la \
 	@LIBCSTRING_LIBADD@
 

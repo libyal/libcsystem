@@ -1,5 +1,5 @@
 MSVSCPP_FILES = \
-	csystem_test_get_version/csystem_test_get_version.vcproj \
+	csystem_test_support/csystem_test_support.vcproj \
 	libcerror/libcerror.vcproj \
 	libclocale/libclocale.vcproj \
 	libcnotify/libcnotify.vcproj \

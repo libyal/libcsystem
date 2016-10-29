@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="csystem_test_get_version"
-	ProjectGUID="{8FCFD6B1-D6B7-4D91-85F3-89F643C9CFCE}"
-	RootNamespace="csystem_test_get_version"
+	Name="csystem_test_support"
+	ProjectGUID="{FDAA9849-E6C2-426A-9F6E-48CB8846B839}"
+	RootNamespace="csystem_test_support"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -176,7 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\tests\csystem_test_get_version.c"
+				RelativePath="..\..\tests\csystem_test_support.c"
 				>
 			</File>
 		</Filter>
@@ -191,6 +191,10 @@
 			</File>
 			<File
 				RelativePath="..\..\tests\csystem_test_libcsystem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\csystem_test_macros.h"
 				>
 			</File>
 			<File
