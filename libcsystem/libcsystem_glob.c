@@ -21,7 +21,10 @@
 
 #include <common.h>
 #include <memory.h>
+#include <narrow_string.h>
+#include <system_string.h>
 #include <types.h>
+#include <wide_string.h>
 
 #if defined( HAVE_ERRNO_H ) || defined( WINAPI )
 #include <errno.h>
@@ -38,11 +41,10 @@
 #include "libcsystem_find.h"
 #include "libcsystem_glob.h"
 #include "libcsystem_libcerror.h"
-#include "libcsystem_libcstring.h"
 #include "libcsystem_types.h"
 
 /* TODO rename */
-#if defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER )
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
 #if defined( _MSC_VER )
 #define libcsystem_path_make( path, path_size, drive, directory, filename, extension ) \
 	_wmakepath_s( path, path_size, drive, directory, filename, extension )
@@ -239,8 +241,8 @@ int libcsystem_glob_resize(
 
 		return( -1 );
 	}
-	previous_size = sizeof( libcstring_system_character_t * ) * internal_glob->number_of_results;
-	new_size      = sizeof( libcstring_system_character_t * ) * new_number_of_results;
+	previous_size = sizeof( system_character_t * ) * internal_glob->number_of_results;
+	new_size      = sizeof( system_character_t * ) * new_number_of_results;
 
 	if( ( previous_size > (size_t) SSIZE_MAX )
 	 || ( new_size > (size_t) SSIZE_MAX ) )
@@ -269,7 +271,7 @@ int libcsystem_glob_resize(
 
 		return( -1 );
 	}
-	internal_glob->results = (libcstring_system_character_t **) reallocation;
+	internal_glob->results = (system_character_t **) reallocation;
 
 	if( memory_set(
 	     &( internal_glob->results[ internal_glob->number_of_results ] ),
@@ -295,18 +297,18 @@ int libcsystem_glob_resize(
  */
 int libcsystem_glob_resolve(
      libcsystem_glob_t *glob,
-     libcstring_system_character_t * const patterns[],
+     system_character_t * const patterns[],
      int number_of_patterns,
      libcerror_error_t **error )
 {
 #if defined( HAVE_IO_H ) || defined( WINAPI )
 	libcsystem_find_data_t find_data;
 
-	libcstring_system_character_t find_path[ _MAX_PATH ];
-	libcstring_system_character_t find_drive[ _MAX_DRIVE ];
-	libcstring_system_character_t find_directory[ _MAX_DIR ];
-	libcstring_system_character_t find_name[ _MAX_FNAME ];
-	libcstring_system_character_t find_extension[ _MAX_EXT ];
+	system_character_t find_path[ _MAX_PATH ];
+	system_character_t find_drive[ _MAX_DRIVE ];
+	system_character_t find_directory[ _MAX_DIR ];
+	system_character_t find_name[ _MAX_FNAME ];
+	system_character_t find_extension[ _MAX_EXT ];
 
 	intptr_t find_handle                      = 0;
 #endif
@@ -406,7 +408,7 @@ int libcsystem_glob_resolve(
 				     find_drive,
 				     find_directory,
 				     find_data.name,
-				     _LIBCSTRING_SYSTEM_STRING( "" )  ) != 0 )
+				     _SYSTEM_STRING( "" )  ) != 0 )
 				{
 					libcerror_error_set(
 					 error,
@@ -424,7 +426,7 @@ int libcsystem_glob_resolve(
 				 find_drive,
 				 find_directory,
 				 find_data.ff_name,
-				 _LIBCSTRING_SYSTEM_STRING( "" ) );
+				 _SYSTEM_STRING( "" ) );
 
 #else
 				libcsystem_path_make(
@@ -433,13 +435,13 @@ int libcsystem_glob_resolve(
 				 find_drive,
 				 find_directory,
 				 find_data.name,
-				 _LIBCSTRING_SYSTEM_STRING( "" ) );
+				 _SYSTEM_STRING( "" ) );
 #endif
 
-				find_path_length = libcstring_system_string_length(
+				find_path_length = system_string_length(
 				                    find_path );
 
-				internal_glob->results[ internal_glob->number_of_results - 1 ] = libcstring_system_string_allocate(
+				internal_glob->results[ internal_glob->number_of_results - 1 ] = system_string_allocate(
 				                                                                  find_path_length + 1 );
 
 				if( internal_glob->results[ internal_glob->number_of_results - 1 ] == NULL )
@@ -453,7 +455,7 @@ int libcsystem_glob_resolve(
 
 					return( -1 );
 				}
-				if( libcstring_system_string_copy(
+				if( system_string_copy(
 				     internal_glob->results[ internal_glob->number_of_results - 1 ],
 				     find_path,
 				     find_path_length ) == NULL )
@@ -537,7 +539,7 @@ int libcsystem_glob_resolve(
 int libcsystem_glob_get_results(
      libcsystem_glob_t *glob,
      int *number_of_results,
-     libcstring_system_character_t ***results,
+     system_character_t ***results,
      libcerror_error_t **error )
 {
 	libcsystem_internal_glob_t *internal_glob = NULL;

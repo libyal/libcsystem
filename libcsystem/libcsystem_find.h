@@ -39,7 +39,7 @@ extern "C" {
 
 /* The find data structure type
  */
-#if defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER )
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
 
 #if defined( __BORLANDC__ ) && __BORLANDC__ <= 0x0520
 #define libcsystem_find_data_t	struct _wffblk
@@ -55,11 +55,11 @@ extern "C" {
 #define libcsystem_find_data_t	struct _finddata_t
 #endif
 
-#endif /* defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER ) */
+#endif /* defined( HAVE_WIDE_SYSTEM_CHARACTER ) */
 
 /* The find first function
  */
-#if defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER )
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
 
 #if defined( __BORLANDC__ )
 #if __BORLANDC__ <= 0x0520
@@ -85,11 +85,11 @@ extern "C" {
 	_findfirst( filter, fileinfo )
 #endif
 
-#endif /* defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER ) */
+#endif /* defined( HAVE_WIDE_SYSTEM_CHARACTER ) */
 
 /* The find next function
  */
-#if defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER )
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
 
 #if defined( __BORLANDC__ )
 #if __BORLANDC__ <= 0x0520
@@ -115,7 +115,7 @@ extern "C" {
 	_findnext( handle, fileinfo )
 #endif
 
-#endif /* defined( LIBCSTRING_HAVE_WIDE_SYSTEM_CHARACTER ) */
+#endif /* defined( HAVE_WIDE_SYSTEM_CHARACTER ) */
 
 /* The find close function
  */

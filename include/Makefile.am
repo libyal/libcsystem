@@ -2,7 +2,6 @@ include_HEADERS = \
 	libcsystem.h
 
 pkginclude_HEADERS = \
-	libcsystem/codepage.h \
 	libcsystem/definitions.h \
 	libcsystem/error.h \
 	libcsystem/extern.h \

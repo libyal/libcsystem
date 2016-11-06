@@ -54,5 +54,5 @@
 	/* parameter */
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_FEATURES_H ) */
 

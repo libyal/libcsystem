@@ -32,14 +32,14 @@ typedef intptr_t libcsystem_error_t;
  */
 enum LIBCSYSTEM_ERROR_DOMAINS
 {
-	LIBCSYSTEM_ERROR_DOMAIN_ARGUMENTS			= (int) 'a',
+	LIBCSYSTEM_ERROR_DOMAIN_ARGUMENTS		= (int) 'a',
 	LIBCSYSTEM_ERROR_DOMAIN_CONVERSION		= (int) 'c',
 	LIBCSYSTEM_ERROR_DOMAIN_COMPRESSION		= (int) 'C',
 	LIBCSYSTEM_ERROR_DOMAIN_IO			= (int) 'I',
 	LIBCSYSTEM_ERROR_DOMAIN_INPUT			= (int) 'i',
 	LIBCSYSTEM_ERROR_DOMAIN_MEMORY			= (int) 'm',
 	LIBCSYSTEM_ERROR_DOMAIN_OUTPUT			= (int) 'o',
-	LIBCSYSTEM_ERROR_DOMAIN_RUNTIME			= (int) 'r',
+	LIBCSYSTEM_ERROR_DOMAIN_RUNTIME			= (int) 'r'
 };
 
 /* The argument error codes
@@ -47,7 +47,7 @@ enum LIBCSYSTEM_ERROR_DOMAINS
  */
 enum LIBCSYSTEM_ARGUMENT_ERROR
 {
-	LIBCSYSTEM_ARGUMENT_ERROR_GENERIC			= 0,
+	LIBCSYSTEM_ARGUMENT_ERROR_GENERIC		= 0,
 
 	/* The argument contains an invalid value
 	 */
@@ -68,11 +68,11 @@ enum LIBCSYSTEM_ARGUMENT_ERROR
 
 	/* The argument contains a value that is too small
 	 */
-	LIBCSYSTEM_ARGUMENT_ERROR_VALUE_TOO_SMALL		= 5,
+	LIBCSYSTEM_ARGUMENT_ERROR_VALUE_TOO_SMALL	= 5,
 
 	/* The argument contains a value that is too large
 	 */
-	LIBCSYSTEM_ARGUMENT_ERROR_VALUE_TOO_LARGE		= 6,
+	LIBCSYSTEM_ARGUMENT_ERROR_VALUE_TOO_LARGE	= 6,
 
 	/* The argument contains a value that is out of bounds
 	 */
@@ -96,11 +96,11 @@ enum LIBCSYSTEM_CONVERSION_ERROR
 
 	/* The conversion failed on the input
 	 */
-	LIBCSYSTEM_CONVERSION_ERROR_INPUT_FAILED		= 1,
+	LIBCSYSTEM_CONVERSION_ERROR_INPUT_FAILED	= 1,
 
 	/* The conversion failed on the output
 	 */
-	LIBCSYSTEM_CONVERSION_ERROR_OUTPUT_FAILED		= 2
+	LIBCSYSTEM_CONVERSION_ERROR_OUTPUT_FAILED	= 2
 };
 
 /* The compression error codes
@@ -132,7 +132,7 @@ enum LIBCSYSTEM_IO_ERROR
 
 	/* The close failed
 	 */
-	LIBCSYSTEM_IO_ERROR_CLOSE_FAILED			= 2,
+	LIBCSYSTEM_IO_ERROR_CLOSE_FAILED		= 2,
 
 	/* The seek failed
 	 */
@@ -144,11 +144,11 @@ enum LIBCSYSTEM_IO_ERROR
 
 	/* The write failed
 	 */
-	LIBCSYSTEM_IO_ERROR_WRITE_FAILED			= 5,
+	LIBCSYSTEM_IO_ERROR_WRITE_FAILED		= 5,
 
 	/* Access denied
 	 */
-	LIBCSYSTEM_IO_ERROR_ACCESS_DENIED			= 6,
+	LIBCSYSTEM_IO_ERROR_ACCESS_DENIED		= 6,
 
 	/* The resource is invalid i.e. a missing file
 	 */
@@ -156,11 +156,11 @@ enum LIBCSYSTEM_IO_ERROR
 
 	/* The ioctl failed
 	 */
-	LIBCSYSTEM_IO_ERROR_IOCTL_FAILED			= 8,
+	LIBCSYSTEM_IO_ERROR_IOCTL_FAILED		= 8,
 
 	/* The unlink failed
 	 */
-	LIBCSYSTEM_IO_ERROR_UNLINK_FAILED			= 9
+	LIBCSYSTEM_IO_ERROR_UNLINK_FAILED		= 9
 };
 
 /* The input error codes
@@ -176,11 +176,11 @@ enum LIBCSYSTEM_INPUT_ERROR
 
 	/* The input contains an unsupported signature
 	 */
-	LIBCSYSTEM_INPUT_ERROR_SIGNATURE_MISMATCH		= 2,
+	LIBCSYSTEM_INPUT_ERROR_SIGNATURE_MISMATCH	= 2,
 
 	/* A checksum in the input did not match
 	 */
-	LIBCSYSTEM_INPUT_ERROR_CHECKSUM_MISMATCH		= 3,
+	LIBCSYSTEM_INPUT_ERROR_CHECKSUM_MISMATCH	= 3,
 
 	/* A value in the input did not match a previously
 	 * read value or calculated value
@@ -208,12 +208,23 @@ enum LIBCSYSTEM_MEMORY_ERROR
 	LIBCSYSTEM_MEMORY_ERROR_SET_FAILED		= 3
 };
 
+/* The output error codes
+ */
+enum LIBCSYSTEM_OUTPUT_ERROR
+{
+	LIBCSYSTEM_OUTPUT_ERROR_GENERIC			= 0,
+
+	/* There is insuficient space to write the output
+	 */
+	LIBCSYSTEM_OUTPUT_ERROR_INSUFFICIENT_SPACE	= 1
+};
+
 /* The runtime error codes
  * to signify errors regarding runtime processing
  */
 enum LIBCSYSTEM_RUNTIME_ERROR
 {
-	LIBCSYSTEM_RUNTIME_ERROR_GENERIC			= 0,
+	LIBCSYSTEM_RUNTIME_ERROR_GENERIC		= 0,
 
 	/* The value is missing
 	 */
@@ -233,7 +244,7 @@ enum LIBCSYSTEM_RUNTIME_ERROR
 
 	/* The free and/or finalization of an internal structure failed
 	 */
-	LIBCSYSTEM_RUNTIME_ERROR_FINALIZE_FAILED		= 5,
+	LIBCSYSTEM_RUNTIME_ERROR_FINALIZE_FAILED	= 5,
 
 	/* The value could not be determined
 	 */
@@ -273,19 +284,8 @@ enum LIBCSYSTEM_RUNTIME_ERROR
 
 	/* An abort was requested
 	 */
-	LIBCSYSTEM_RUNTIME_ERROR_ABORT_REQUESTED		= 15
+	LIBCSYSTEM_RUNTIME_ERROR_ABORT_REQUESTED	= 15
 };
 
-/* The output error codes
- */
-enum LIBCSYSTEM_OUTPUT_ERROR
-{
-	LIBCSYSTEM_OUTPUT_ERROR_GENERIC			= 0,
-
-	/* There is insuficient space to write the output
-	 */
-	LIBCSYSTEM_OUTPUT_ERROR_INSUFFICIENT_SPACE	= 1
-};
-
-#endif
+#endif /* !defined( _LIBCSYSTEM_ERROR_H ) */
 

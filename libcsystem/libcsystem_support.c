@@ -20,13 +20,11 @@
  */
 
 #include <common.h>
+#include <file_stream.h>
 #include <types.h>
-
-#include <stdio.h>
 
 #include "libcsystem_definitions.h"
 #include "libcsystem_libcerror.h"
-#include "libcsystem_libcstring.h"
 #include "libcsystem_support.h"
 
 #if !defined( HAVE_LOCAL_LIBCSYSTEM )

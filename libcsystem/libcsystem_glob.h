@@ -28,7 +28,6 @@
 #include "libcsystem_definitions.h"
 #include "libcsystem_extern.h"
 #include "libcsystem_libcerror.h"
-#include "libcsystem_libcstring.h"
 #include "libcsystem_types.h"
 
 #if defined( __cplusplus )
@@ -47,7 +46,7 @@ struct libcsystem_internal_glob
 
 	/* The resolved globs
 	 */
-	libcstring_system_character_t **results;
+	system_character_t **results;
 };
 
 LIBCSYSTEM_EXTERN \
@@ -68,7 +67,7 @@ int libcsystem_glob_resize(
 LIBCSYSTEM_EXTERN \
 int libcsystem_glob_resolve(
      libcsystem_glob_t *glob,
-     libcstring_system_character_t * const patterns[],
+     system_character_t * const patterns[],
      int number_of_patterns,
      libcerror_error_t **error );
 
@@ -76,14 +75,14 @@ LIBCSYSTEM_EXTERN \
 int libcsystem_glob_get_results(
      libcsystem_glob_t *glob,
      int *number_of_results,
-     libcstring_system_character_t ***results,
+     system_character_t ***results,
      libcerror_error_t **error );
 
-#endif
+#endif /* !defined( HAVE_GLOB_H ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_GLOB_H ) */
 

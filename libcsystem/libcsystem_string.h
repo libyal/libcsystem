@@ -26,21 +26,20 @@
 #include <types.h>
 
 #include "libcsystem_libcerror.h"
-#include "libcsystem_libcstring.h"
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
 int libcsystem_string_decimal_copy_from_64_bit(
-     libcstring_system_character_t *string,
+     system_character_t *string,
      size_t string_size,
      size_t *string_index,
      uint64_t value_64bit,
      libcerror_error_t **error );
 
 int libcsystem_string_decimal_copy_to_64_bit(
-     const libcstring_system_character_t *string,
+     const system_character_t *string,
      size_t string_size,
      uint64_t *value_64bit,
      libcerror_error_t **error );
@@ -52,20 +51,20 @@ int libcsystem_string_size_from_utf8_string(
      libcerror_error_t **error );
 
 int libcsystem_string_copy_from_utf8_string(
-     libcstring_system_character_t *string,
+     system_character_t *string,
      size_t string_size,
      const uint8_t *utf8_string,
      size_t utf8_string_size,
      libcerror_error_t **error );
 
 int libcsystem_string_size_to_utf8_string(
-     const libcstring_system_character_t *string,
+     const system_character_t *string,
      size_t string_size,
      size_t *utf8_string_size,
      libcerror_error_t **error );
 
 int libcsystem_string_copy_to_utf8_string(
-     const libcstring_system_character_t *string,
+     const system_character_t *string,
      size_t string_size,
      uint8_t *utf8_string,
      size_t utf8_string_size,
@@ -75,5 +74,5 @@ int libcsystem_string_copy_to_utf8_string(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_STRING_H ) */
 

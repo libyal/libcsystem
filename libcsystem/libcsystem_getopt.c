@@ -20,7 +20,10 @@
  */
 
 #include <common.h>
+#include <narrow_string.h>
+#include <system_string.h>
 #include <types.h>
+#include <wide_string.h>
 
 #if defined( HAVE_STDLIB_H ) || defined( WINAPI )
 #include <stdlib.h>
@@ -28,13 +31,12 @@
 
 #include "libcsystem_getopt.h"
 #include "libcsystem_libcnotify.h"
-#include "libcsystem_libcstring.h"
 
 #if !defined( HAVE_GETOPT )
 
 /* The current option argument
  */
-libcstring_system_character_t *optarg = NULL;
+system_character_t *optarg = NULL;
 
 /* The option index
  * Start with argument 1 (argument 0 is the program name)
@@ -43,26 +45,26 @@ int optind = 1;
 
 /* Value to indicate the current option
  */
-libcstring_system_integer_t optopt = 0;
+system_integer_t optopt = 0;
 
 /* Get the program options
  * Function for platforms that do not have the getopt function
  * Returns the option character processed, or -1 on error,
  * ? if the option was not in the options string, : if the option argument was missing
  */
-libcstring_system_integer_t libcsystem_getopt(
-                             int argument_count,
-                             libcstring_system_character_t * const argument_values[],
-                             const libcstring_system_character_t *options_string )
+system_integer_t libcsystem_getopt(
+                  int argument_count,
+                  system_character_t * const argument_values[],
+                  const system_character_t *options_string )
 {
-	libcstring_system_character_t *option_value   = NULL;
-	libcstring_system_character_t *argument_value = NULL;
-	static char *function                         = "libcsystem_getopt";
-	size_t options_string_length                  = 0;
+	system_character_t *option_value   = NULL;
+	system_character_t *argument_value = NULL;
+	static char *function              = "libcsystem_getopt";
+	size_t options_string_length       = 0;
 
 	if( optind >= argument_count )
 	{
-		return( (libcstring_system_integer_t) -1 );
+		return( (system_integer_t) -1 );
 	}
 	argument_value = argument_values[ optind ];
 
@@ -70,29 +72,29 @@ libcstring_system_integer_t libcsystem_getopt(
 	 */
 	if( *argument_value == 0 )
 	{
-		return( (libcstring_system_integer_t) -1 );
+		return( (system_integer_t) -1 );
 	}
 	/* Check if the first character is a option marker '-'
 	 */
-	if( *argument_value != (libcstring_system_character_t) '-' )
+	if( *argument_value != (system_character_t) '-' )
 	{
-		return( (libcstring_system_integer_t) -1 );
+		return( (system_integer_t) -1 );
 	}
 	argument_value++;
 
 	/* Check if long options are provided '--'
 	 */
-	if( *argument_value == (libcstring_system_character_t) '-' )
+	if( *argument_value == (system_character_t) '-' )
 	{
 		optind++;
 
-		return( (libcstring_system_integer_t) -1 );
+		return( (system_integer_t) -1 );
 	}
-	options_string_length = libcstring_system_string_length(
+	options_string_length = system_string_length(
 	                         options_string );
 
 	optopt       = *argument_value;
-	option_value = libcstring_system_string_search_character(
+	option_value = system_string_search_character(
 	                options_string,
 	                optopt,
 	                options_string_length );
@@ -102,39 +104,39 @@ libcstring_system_integer_t libcsystem_getopt(
 	/* Check if an argument was specified or that the option was not found
 	 * in the option string
 	 */
-	if( ( optopt == (libcstring_system_integer_t) ':' )
+	if( ( optopt == (system_integer_t) ':' )
 	 || ( option_value == NULL ) )
 	{
-		if( *argument_value == (libcstring_system_character_t) '\0' )
+		if( *argument_value == (system_character_t) '\0' )
 		{
 			optind++;
 		}
-		if( ( *options_string != (libcstring_system_character_t) ':' )
-		 && ( optopt != (libcstring_system_integer_t) '?' ) )
+		if( ( *options_string != (system_character_t) ':' )
+		 && ( optopt != (system_integer_t) '?' ) )
 		{
 			libcnotify_printf(
-			 "%s: no such option: %" PRIc_LIBCSTRING_SYSTEM ".\n",
+			 "%s: no such option: %" PRIc_SYSTEM ".\n",
 			 function,
 			 optopt );
 		}
-		return( (libcstring_system_integer_t) '?' );
+		return( (system_integer_t) '?' );
 	}
 	option_value++;
 
 	/* Check if no option argument is required
 	 */
-	if( *option_value != (libcstring_system_character_t) ':' )
+	if( *option_value != (system_character_t) ':' )
 	{
 		optarg = NULL;
 
-		if( *argument_value == (libcstring_system_character_t) '\0' )
+		if( *argument_value == (system_character_t) '\0' )
 		{
 			optind++;
 		}
 	}
 	/* Check if the argument is right after the option flag with no space in between
 	 */
-	else if( *argument_value != (libcstring_system_character_t) '\0' )
+	else if( *argument_value != (system_character_t) '\0' )
 	{
 		optarg = argument_value;
 
@@ -150,14 +152,14 @@ libcstring_system_integer_t libcsystem_getopt(
 		{
 			if( *option_value == ':' )
 			{
-				return( (libcstring_system_integer_t) ':' );
+				return( (system_integer_t) ':' );
 			}
 			libcnotify_printf(
-			 "%s: option: %" PRIc_LIBCSTRING_SYSTEM " requires an argument.\n",
+			 "%s: option: %" PRIc_SYSTEM " requires an argument.\n",
 			 function,
 			 optopt );
 
-			return( (libcstring_system_integer_t) '?' );
+			return( (system_integer_t) '?' );
 		}
 		optarg = argument_values[ optind ];
 
@@ -166,5 +168,5 @@ libcstring_system_integer_t libcsystem_getopt(
 	return( optopt );
 }
 
-#endif
+#endif /* !defined( HAVE_GETOPT ) */
 

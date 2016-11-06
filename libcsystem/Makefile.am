@@ -1,7 +1,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include \
 	-I$(top_srcdir)/common \
-	@LIBCSTRING_CPPFLAGS@ \
 	@LIBCERROR_CPPFLAGS@ \
 	@LIBCLOCALE_CPPFLAGS@ \
 	@LIBCNOTIFY_CPPFLAGS@ \
@@ -19,11 +18,9 @@ libcsystem_la_SOURCES = \
 	libcsystem_getopt.c libcsystem_getopt.h \
 	libcsystem_glob.c libcsystem_glob.h \
 	libcsystem_i18n.h \
-	libcsystem_libcstring.h \
 	libcsystem_libcerror.h \
 	libcsystem_libclocale.h \
 	libcsystem_libcnotify.h \
-	libcsystem_libcstring.h \
 	libcsystem_libuna.h \
 	libcsystem_signal.c libcsystem_signal.h \
 	libcsystem_string.c libcsystem_string.h \
@@ -32,7 +29,6 @@ libcsystem_la_SOURCES = \
 	libcsystem_unused.h
 
 libcsystem_la_LIBADD = \
-	@LIBCSTRING_LIBADD@ \
 	@LIBCERROR_LIBADD@ \
 	@LIBCLOCALE_LIBADD@ \
 	@LIBCNOTIFY_LIBADD@ \
