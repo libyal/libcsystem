@@ -131,5 +131,5 @@ extern "C" {
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_FIND_H ) */
 

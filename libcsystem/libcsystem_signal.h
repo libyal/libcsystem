@@ -60,5 +60,5 @@ int libcsystem_signal_detach(
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_SIGNAL_H ) */
 

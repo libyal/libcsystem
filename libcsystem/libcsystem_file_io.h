@@ -123,5 +123,5 @@ extern "C" {
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_FILE_IO_H ) */
 

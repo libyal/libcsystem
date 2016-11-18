@@ -44,5 +44,5 @@ extern "C" {
 }
 #endif
 
-#endif
+#endif /* !defined( _LIBCSYSTEM_I18N_H ) */
 
