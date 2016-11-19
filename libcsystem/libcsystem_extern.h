@@ -38,9 +38,9 @@
 #include <libcsystem/extern.h>
 
 #else
-#define LIBCSYSTEM_EXTERN	extern
+#define LIBCSYSTEM_EXTERN	/* extern */
 
-#endif
+#endif /* !defined( HAVE_LOCAL_LIBCSYSTEM ) */
 
 #endif /* !defined( _LIBCSYSTEM_INTERNAL_EXTERN_H ) */
 
