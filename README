@@ -1,5 +1,8 @@
 libcsystem is a library for cross-platform C system functions.
 
+libcsystem has been deprecated in favor of having the majority of the code in
+the tools subdirectory of the individual libyal projects.
+
 Project information:
 
 * Status: alpha
