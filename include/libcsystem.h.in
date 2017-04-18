@@ -124,12 +124,62 @@ int libcsystem_initialize(
  * ------------------------------------------------------------------------- */
 
 #if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_open( filename, flags ) \
+        _open( filename, flags )
+
+#elif defined( HAVE_OPEN )
+#define libcsystem_file_io_open( filename, flags ) \
+        open( filename, flags, 0644 )
+#endif
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_wopen( filename, flags ) \
+        _wopen( filename, flags )
+#endif
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
 #define libcsystem_file_io_close( file_descriptor ) \
         _close( file_descriptor )
 
 #elif defined( HAVE_CLOSE )
 #define libcsystem_file_io_close( file_descriptor ) \
         close( file_descriptor )
+#endif
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_read( file_descriptor, buffer, size ) \
+        _read( file_descriptor, (void *) buffer, (unsigned int) size )
+
+#elif defined( HAVE_READ )
+#define libcsystem_file_io_read( file_descriptor, buffer, size ) \
+        read( file_descriptor, (void *) buffer, size )
+#endif
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_lseek( file_descriptor, offset, whence ) \
+        _lseeki64( file_descriptor, offset, whence )
+
+#elif defined( HAVE_LSEEK )
+#define libcsystem_file_io_lseek( file_descriptor, offset, whence ) \
+        lseek( file_descriptor, offset, whence )
+#endif
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_resize( file_descriptor, size ) \
+        _chsize( file_descriptor, (long) size )
+
+#elif defined( HAVE_FTRUNCATE )
+#define libcsystem_file_io_resize( file_descriptor, size ) \
+        ftruncate( file_descriptor, (off_t) size )
+#endif
+
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+#define libcsystem_file_io_write( file_descriptor, buffer, size ) \
+        _write( file_descriptor, (const void *) buffer, (unsigned int) size )
+
+#elif defined( HAVE_WRITE )
+#define libcsystem_file_io_write( file_descriptor, buffer, size ) \
+        write( file_descriptor, (const void *) buffer, size )
 #endif
 
 /* -------------------------------------------------------------------------
