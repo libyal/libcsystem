@@ -2,7 +2,7 @@ AC_PREREQ( 2.59 )
 
 AC_INIT(
  [libcsystem],
- [20161119],
+ [20170724],
  [joachim.metz@gmail.com])
 
 AC_CONFIG_SRCDIR(
@@ -159,7 +159,6 @@ AC_CONFIG_FILES([libcsystem/libcsystem_definitions.h])
 dnl Have configure make distribution specific files
 AC_CONFIG_FILES([common/types.h])
 AC_CONFIG_FILES([dpkg/changelog])
-AC_CONFIG_FILES([dpkg/copyright])
 AC_CONFIG_FILES([libcsystem/libcsystem.rc])
 AC_CONFIG_FILES([libcsystem.pc])
 AC_CONFIG_FILES([libcsystem.spec])

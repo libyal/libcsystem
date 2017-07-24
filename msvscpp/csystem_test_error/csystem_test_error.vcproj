@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="csystem_test_support"
-	ProjectGUID="{FDAA9849-E6C2-426A-9F6E-48CB8846B839}"
-	RootNamespace="csystem_test_support"
+	Name="csystem_test_error"
+	ProjectGUID="{D4F2CA4D-C409-420D-B18A-F2E265DC3468}"
+	RootNamespace="csystem_test_error"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -176,7 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\tests\csystem_test_support.c"
+				RelativePath="..\..\tests\csystem_test_error.c"
 				>
 			</File>
 		</Filter>
@@ -185,10 +185,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\..\tests\csystem_test_libcerror.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\tests\csystem_test_libcsystem.h"
 				>

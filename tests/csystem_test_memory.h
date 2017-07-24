@@ -1,5 +1,5 @@
 /*
- * GetOpt functions
+ * Memory allocation functions for testing
  *
  * Copyright (C) 2008-2017, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -19,49 +19,34 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBCSYSTEM_GETOPT_H )
-#define _LIBCSYSTEM_GETOPT_H
+#if !defined( _CSYSTEM_TEST_MEMORY_H )
+#define _CSYSTEM_TEST_MEMORY_H
 
 #include <common.h>
-#include <types.h>
-
-#include "libcsystem_extern.h"
-
-/* unistd.h is included here to export getopt, optarg, optind and optopt
- */
-#if defined( HAVE_UNISTD_H )
-#include <unistd.h>
-#endif
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-#if defined( HAVE_GETOPT )
-#define libcsystem_getopt( argument_count, argument_values, options_string ) \
-	getopt( argument_count, argument_values, options_string )
+#if defined( HAVE_GNU_DL_DLSYM ) && defined( __GNUC__ ) && !defined( LIBCSYSTEM_DLL_IMPORT ) && !defined( __arm__ ) && !defined( __clang__ ) && !defined( __CYGWIN__ ) && !defined( __hppa__ ) && !defined( __mips__ ) && !defined( __sparc__ )
+#define HAVE_CSYSTEM_TEST_MEMORY		1
+#endif
 
-#else
-LIBCSYSTEM_EXTERN \
-system_character_t *optarg;
+#if defined( HAVE_CSYSTEM_TEST_MEMORY )
 
-LIBCSYSTEM_EXTERN \
-int optind;
+extern int csystem_test_malloc_attempts_before_fail;
 
-LIBCSYSTEM_EXTERN \
-system_integer_t optopt;
+extern int csystem_test_memcpy_attempts_before_fail;
 
-LIBCSYSTEM_EXTERN \
-system_integer_t libcsystem_getopt(
-                  int argument_count,
-                  system_character_t * const argument_values[],
-                  const system_character_t *options_string );
+extern int csystem_test_memset_attempts_before_fail;
 
-#endif /* defined( HAVE_GETOPT ) */
+extern int csystem_test_realloc_attempts_before_fail;
+
+#endif /* defined( HAVE_CSYSTEM_TEST_MEMORY ) */
 
 #if defined( __cplusplus )
 }
 #endif
 
-#endif /* !defined( _LIBCSYSTEM_GETOPT_H ) */
+#endif /* !defined( _CSYSTEM_TEST_MEMORY_H ) */
 

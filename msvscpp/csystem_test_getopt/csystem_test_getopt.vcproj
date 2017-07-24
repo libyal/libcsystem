@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="csystem_test_support"
-	ProjectGUID="{FDAA9849-E6C2-426A-9F6E-48CB8846B839}"
-	RootNamespace="csystem_test_support"
+	Name="csystem_test_getopt"
+	ProjectGUID="{3EA48DD0-FE5D-46C2-9D12-32070DF474B1}"
+	RootNamespace="csystem_test_getopt"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -176,7 +176,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\tests\csystem_test_support.c"
+				RelativePath="..\..\tests\csystem_test_getopt.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\csystem_test_memory.c"
 				>
 			</File>
 		</Filter>
@@ -195,6 +199,10 @@
 			</File>
 			<File
 				RelativePath="..\..\tests\csystem_test_macros.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\tests\csystem_test_memory.h"
 				>
 			</File>
 			<File

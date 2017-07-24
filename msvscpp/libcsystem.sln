@@ -1,9 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csystem_test_error", "csystem_test_error\csystem_test_error.vcproj", "{D4F2CA4D-C409-420D-B18A-F2E265DC3468}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1CAC7B2F-3ADD-4F55-AAB8-2EB7D7468D48} = {1CAC7B2F-3ADD-4F55-AAB8-2EB7D7468D48}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csystem_test_getopt", "csystem_test_getopt\csystem_test_getopt.vcproj", "{3EA48DD0-FE5D-46C2-9D12-32070DF474B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1CAC7B2F-3ADD-4F55-AAB8-2EB7D7468D48} = {1CAC7B2F-3ADD-4F55-AAB8-2EB7D7468D48}
+		{F90DAEEC-C0AB-4F7D-A78A-CE951214D293} = {F90DAEEC-C0AB-4F7D-A78A-CE951214D293}
+	EndProjectSection
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csystem_test_support", "csystem_test_support\csystem_test_support.vcproj", "{FDAA9849-E6C2-426A-9F6E-48CB8846B839}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1CAC7B2F-3ADD-4F55-AAB8-2EB7D7468D48} = {1CAC7B2F-3ADD-4F55-AAB8-2EB7D7468D48}
+		{F90DAEEC-C0AB-4F7D-A78A-CE951214D293} = {F90DAEEC-C0AB-4F7D-A78A-CE951214D293}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libclocale", "libclocale\libclocale.vcproj", "{FFF2FFD1-4BE3-4F08-A64A-D44CE793468F}"
@@ -37,6 +49,14 @@ Global
 		VSDebug|Win32 = VSDebug|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4F2CA4D-C409-420D-B18A-F2E265DC3468}.Release|Win32.ActiveCfg = Release|Win32
+		{D4F2CA4D-C409-420D-B18A-F2E265DC3468}.Release|Win32.Build.0 = Release|Win32
+		{D4F2CA4D-C409-420D-B18A-F2E265DC3468}.VSDebug|Win32.ActiveCfg = VSDebug|Win32
+		{D4F2CA4D-C409-420D-B18A-F2E265DC3468}.VSDebug|Win32.Build.0 = VSDebug|Win32
+		{3EA48DD0-FE5D-46C2-9D12-32070DF474B1}.Release|Win32.ActiveCfg = Release|Win32
+		{3EA48DD0-FE5D-46C2-9D12-32070DF474B1}.Release|Win32.Build.0 = Release|Win32
+		{3EA48DD0-FE5D-46C2-9D12-32070DF474B1}.VSDebug|Win32.ActiveCfg = VSDebug|Win32
+		{3EA48DD0-FE5D-46C2-9D12-32070DF474B1}.VSDebug|Win32.Build.0 = VSDebug|Win32
 		{FDAA9849-E6C2-426A-9F6E-48CB8846B839}.Release|Win32.ActiveCfg = Release|Win32
 		{FDAA9849-E6C2-426A-9F6E-48CB8846B839}.Release|Win32.Build.0 = Release|Win32
 		{FDAA9849-E6C2-426A-9F6E-48CB8846B839}.VSDebug|Win32.ActiveCfg = VSDebug|Win32

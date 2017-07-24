@@ -113,13 +113,15 @@ stamp-h[1-9]
 /common/config.h.in
 /common/types.h
 /dpkg/changelog
-/dpkg/copyright
 /include/libcsystem.h
 /include/libcsystem/definitions.h
 /include/libcsystem/features.h
 /include/libcsystem/types.h
 /libcsystem/libcsystem.rc
 /libcsystem/libcsystem_definitions.h
+/tests/*.exe
+/tests/csystem_test_error
+/tests/csystem_test_getopt
 /tests/csystem_test_support
 /tests/tmp*
 

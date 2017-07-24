@@ -19,10 +19,9 @@ DPKG_FILES = \
 	dpkg/compat \
 	dpkg/control \
 	dpkg/copyright \
-	dpkg/copyright.in \
 	dpkg/rules \
-	dpkg/libcsystem-dev.docs \
-	dpkg/libcsystem.docs \
+	dpkg/libcsystem-dev.install \
+	dpkg/libcsystem.install \
 	dpkg/source/format
 
 GETTEXT_FILES = \

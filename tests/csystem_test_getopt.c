@@ -1,8 +1,5 @@
 /*
- * The extern definition
- *
- * This header should be included in header files that export or import
- * library functions
+ * Library getopt type test program
  *
  * Copyright (C) 2008-2017, Joachim Metz <joachim.metz@gmail.com>
  *
@@ -22,23 +19,38 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if !defined( _LIBCSYSTEM_EXTERN_H )
-#define _LIBCSYSTEM_EXTERN_H
+#include <common.h>
+#include <file_stream.h>
+#include <types.h>
 
-/* To export functions from the libcsystem DLL define LIBCSYSTEM_DLL_EXPORT
- * To import functions from the libcsystem DLL define LIBCSYSTEM_DLL_IMPORT
- * Otherwise use default extern statement
- */
-#if defined( LIBCSYSTEM_DLL_EXPORT )
-#define LIBCSYSTEM_EXTERN __declspec(dllexport)
-
-#elif defined( LIBCSYSTEM_DLL_IMPORT )
-#define LIBCSYSTEM_EXTERN extern __declspec(dllimport)
-
-#else
-#define LIBCSYSTEM_EXTERN extern
-
+#if defined( HAVE_STDLIB_H ) || defined( WINAPI )
+#include <stdlib.h>
 #endif
 
-#endif /* !defined( _LIBCSYSTEM_EXTERN_H ) */
+#include "csystem_test_libcerror.h"
+#include "csystem_test_libcsystem.h"
+#include "csystem_test_macros.h"
+#include "csystem_test_memory.h"
+#include "csystem_test_unused.h"
+
+/* The main program
+ */
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
+int wmain(
+     int argc CSYSTEM_TEST_ATTRIBUTE_UNUSED,
+     wchar_t * const argv[] CSYSTEM_TEST_ATTRIBUTE_UNUSED )
+#else
+int main(
+     int argc CSYSTEM_TEST_ATTRIBUTE_UNUSED,
+     char * const argv[] CSYSTEM_TEST_ATTRIBUTE_UNUSED )
+#endif
+{
+	CSYSTEM_TEST_UNREFERENCED_PARAMETER( argc )
+	CSYSTEM_TEST_UNREFERENCED_PARAMETER( argv )
+
+	return( EXIT_SUCCESS );
+
+on_error:
+	return( EXIT_FAILURE );
+}
 
