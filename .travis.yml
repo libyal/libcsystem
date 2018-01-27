@@ -16,11 +16,11 @@ matrix:
   - env: TARGET="macos-clang"
     compiler: clang
     os: osx
-    osx_image: xcode8.1
+    osx_image: xcode8.3
   - env: TARGET="macos-gcc"
     compiler: gcc
     os: osx
-    osx_image: xcode8.1
+    osx_image: xcode8.3
   - env: TARGET="shared"
     compiler: gcc
     os: linux
@@ -32,8 +32,8 @@ before_install:
   - if test ${TRAVIS_OS_NAME} = "osx"; then brew update && brew install gettext gnu-sed && brew link --force gettext; fi
 install:
   - if test ${TRAVIS_OS_NAME} = "osx"; then export SED="/usr/local/bin/gsed"; fi
-  - if test ${TARGET} = "shared"; then ./syncsharedlibs.sh --use-head; fi
   - ./synclibs.sh --use-head && ./autogen.sh
+  - if test ${TARGET} = "shared"; then ./configure > /dev/null && make > /dev/null && ./syncsharedlibs.sh --use-head; fi
   - if test -x "synctestdata.sh"; then ./synctestdata.sh; fi
 script:
   - if test ${TRAVIS_OS_NAME} = "linux"; then export PATH=$(echo $PATH | tr ":" "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s/::/:/g"); fi
